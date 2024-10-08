@@ -40,9 +40,9 @@ export default function handler(req, res) {
             console.log(comment_id);
             console.log(page.id);
             hideComment(comment_id, page.access_token);
-            res.send('hidden').status(200)
+            res.status(200).send('hidden')
           } else {
-            res.send('not comment added').status(200)
+            res.status(200).send('not comment added')
           }
         }
       }

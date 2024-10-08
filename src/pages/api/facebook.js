@@ -45,8 +45,10 @@ export default function handler(req, res) {
           } else {
             console.log('not comment added')
             res.status(200)
-          }
         }
+    }
+    console.log('not feed')
+    res.status(200)
       }
 
     const hideComment = (comment_id, access_token) => {

@@ -1,3 +1,5 @@
+
+
 export default function handler(req, res) {
     if (req.method == 'GET') {
         handlerGetMethod(req, res)
@@ -19,7 +21,7 @@ export default function handler(req, res) {
     }
 
     const handlerPostMethod = (req, res) => {
-        const config = process.env.NEXT_PUBLIC_CONFIG;
+        const config = JSON.parse(process.env.NEXT_PUBLIC_CONFIG || {});
         console.log(config);
         const field = req.body.entry[0].changes?.[0]?.field;
         const page_id = req.body.entry[0].id;

@@ -28,17 +28,17 @@ export default function handler(req, res) {
           return page.id == page_id;
         })  
         
-        console.log(field);
+        console.log("Field: " + field);
         // Check if comment is added
         if (field) {
           const item = req.body.entry[0].changes[0].value.item;
           const verb = req.body.entry[0].changes[0].value.verb;
-          console.log(item);
-          console.log(verb);
+          console.log("Item: " + item);
+          console.log("Verb: " + verb);
           if (item == 'comment' && verb == 'add') {
             const comment_id = req.body.entry[0].changes[0].value.comment_id;
-            console.log(comment_id);
-            console.log(page.id);
+            console.log("Comment ID: " + comment_id);
+            console.log("Page ID: " + page.id);
             hideComment(comment_id, page.access_token);
             res.status(200).send('hidden')
           } else {

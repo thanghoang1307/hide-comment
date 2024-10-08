@@ -31,7 +31,6 @@ export default function handler(req, res) {
       
         // Check if comment is added
         if (field) {
-          received_updates.unshift(req.body);
           const item = req.body.entry[0].changes[0].value.item;
           const verb = req.body.entry[0].changes[0].value.verb;
           if (item == 'comment' && verb == 'add') {

@@ -1,8 +1,4 @@
-app.get(['/facebook', '/instagram'], function (req, res) {
-    
-  });
-
-  export default function handler(req, res) {
+export default function handler(req, res) {
     if (req.method == 'GET') {
         handlerGetMethod(req, res)
     } else {
@@ -39,16 +35,15 @@ app.get(['/facebook', '/instagram'], function (req, res) {
             const comment_id = req.body.entry[0].changes[0].value.comment_id;
             hideComment(comment_id, page.access_token);
           }
-          
-          // Test simple chatbot
         }
+        res.status(200)
       }
 
     const hideComment = (comment_id, access_token) => {
         const url = `https://graph.facebook.com/v20.0/${comment_id}?is_hidden=true&access_token=${access_token}`;
         
         axios.post(url, null, { params: {is_hidden: true} }).then(response => {
-          // response.sendStatus(200);
+            console.log(response)
         })
           .catch(error => {
             console.log(error)  // Truyền lỗi đến middleware xử lý lỗi

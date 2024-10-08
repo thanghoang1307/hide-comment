@@ -5,7 +5,7 @@ export default function handler(req, res) {
         handlerGetMethod(req, res)
     } else {
         handlerPostMethod(req, res)
-        return { "dummy": "data"}
+        res.status(200).json({ message: 'Done' })
     }
 }
 
@@ -47,6 +47,7 @@ export default function handler(req, res) {
         }
     }
     console.log('not feed')
+    return "Done";
       }
 
     const hideComment = (comment_id, access_token) => {
@@ -54,6 +55,7 @@ export default function handler(req, res) {
         
         axios.post(url, null, { params: {is_hidden: true} }).then(response => {
             console.log(response)
+            return "Done";
         })
           .catch(error => {
             console.log(error)  // Truyền lỗi đến middleware xử lý lỗi

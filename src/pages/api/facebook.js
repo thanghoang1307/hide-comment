@@ -28,9 +28,9 @@ export default function handler(req, res) {
           return page.id == page_id;
         })  
         
+        console.log(field);
         // Check if comment is added
-        if (isset(field)) {
-            console.log(field);
+        if (field) {
           const item = req.body.entry[0].changes[0].value.item;
           const verb = req.body.entry[0].changes[0].value.verb;
           console.log(item);

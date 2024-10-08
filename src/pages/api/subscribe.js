@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 export default function handler(req, res) {
     const config = JSON.parse(process.env.NEXT_PUBLIC_CONFIG || {});
   const pages = config.data;

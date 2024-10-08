@@ -27,14 +27,18 @@ export default function handler(req, res) {
         const page = config.data.find((page) => {
           return page.id == page_id;
         })  
-      
+        
         // Check if comment is added
         if (isset(field)) {
+            console.log(field);
           const item = req.body.entry[0].changes[0].value.item;
           const verb = req.body.entry[0].changes[0].value.verb;
+          console.log(item);
+          console.log(verb);
           if (item == 'comment' && verb == 'add') {
             const comment_id = req.body.entry[0].changes[0].value.comment_id;
             console.log(comment_id);
+            console.log(page.id);
             hideComment(comment_id, page.access_token);
           }
         }

@@ -5,6 +5,7 @@ export default function handler(req, res) {
         handlerGetMethod(req, res)
     } else {
         handlerPostMethod(req, res)
+        res.status(200)
     }
 }
 
@@ -26,7 +27,7 @@ export default function handler(req, res) {
         const page_id = req.body.entry[0].id;
         const page = config.data.find((page) => {
           return page.id == page_id;
-        })  
+        })
         
         console.log("Field: " + field);
         // Check if comment is added
@@ -41,14 +42,11 @@ export default function handler(req, res) {
             console.log("Page ID: " + page.id);
             hideComment(comment_id, page.access_token);
             console.log('hidden')
-            res.status(200)
           } else {
             console.log('not comment added')
-            res.status(200)
         }
     }
     console.log('not feed')
-    res.status(200)
       }
 
     const hideComment = (comment_id, access_token) => {

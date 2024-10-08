@@ -20,6 +20,7 @@ export default function handler(req, res) {
 
     const handlerPostMethod = (req, res) => {
         const config = process.env.CONFIG;
+        console.log(config);
         const field = req.body.entry[0].changes?.[0]?.field;
         const page_id = req.body.entry[0].id;
         const page = config.data.find((page) => {

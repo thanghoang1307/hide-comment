@@ -29,11 +29,12 @@ export default function handler(req, res) {
         })  
       
         // Check if comment is added
-        if (field) {
+        if (isset(field)) {
           const item = req.body.entry[0].changes[0].value.item;
           const verb = req.body.entry[0].changes[0].value.verb;
           if (item == 'comment' && verb == 'add') {
             const comment_id = req.body.entry[0].changes[0].value.comment_id;
+            console.log(comment_id);
             hideComment(comment_id, page.access_token);
           }
         }

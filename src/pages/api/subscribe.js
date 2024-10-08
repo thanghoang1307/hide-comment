@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 export default function handler(req, res) {
     const config = JSON.parse(process.env.NEXT_PUBLIC_CONFIG || {});

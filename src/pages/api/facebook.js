@@ -51,7 +51,7 @@ export default function handler(req, res) {
       }
 
     const hideComment = (comment_id, access_token) => {
-        const url = `https://graph.facebook.com/v20.0/${comment_id}?is_hidden=true&access_token=${access_token}`;
+        const url = `https://graph.facebook.com/v21.0/${comment_id}?is_hidden=true&access_token=${access_token}`;
         
         axios.post(url, null, { params: {is_hidden: true} }).then(response => {
             console.log(response)

@@ -50,10 +50,8 @@ export default function handler(req, res) {
         axios.post(url, null, {is_hidden: true, timeout: 10000})
         .then(response => {
           console.log(response)
-          res.json(response)
       })
         .catch(error => {
-          res.json(error)
         });
       }
   

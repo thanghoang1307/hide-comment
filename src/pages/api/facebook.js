@@ -49,13 +49,13 @@ export default function handler(req, res) {
         
         axios.post(
           {
-            url: url,
-            params: {is_hidden: true},
-            headers: {
+            "url": url,
+            "params": {is_hidden: true},
+            "headers": {
               'Content-Type': 'application/json',
               'Accept': 'application/json'
             },
-            timeout: 10000
+            "timeout": 10000
           })
           .then(response => {
             console.log(response)

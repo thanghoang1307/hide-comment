@@ -47,14 +47,14 @@ export default function handler(req, res) {
     const hideComment = (comment_id, access_token) => {
         const url = `https://graph.facebook.com/v21.0/${comment_id}?is_hidden=true&access_token=${access_token}`;
         
-        axios.post(url, null, {timeout: 10000})
-          .then(response => {
-            console.log(response)
-            return "Done";
-        })
-          .catch(error => {
-            console.log(error)  // Truyền lỗi đến middleware xử lý lỗi
-          });
+        axios.post(url, null, {is_hidden: true, timeout: 10000})
+        .then(response => {
+          console.log(response)
+          res.json(response)
+      })
+        .catch(error => {
+          res.json(error)
+        });
       }
   
     

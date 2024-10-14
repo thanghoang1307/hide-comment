@@ -50,7 +50,6 @@ export default function handler(req, res) {
         axios.post(
           {
             "url": url,
-            "params": {is_hidden: true},
             "headers": {
               'Content-Type': 'application/json',
               'Accept': 'application/json'

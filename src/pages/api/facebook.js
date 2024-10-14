@@ -50,10 +50,6 @@ export default function handler(req, res) {
         axios.post(
           {
             "url": url,
-            "headers": {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
             "timeout": 10000
           })
           .then(response => {

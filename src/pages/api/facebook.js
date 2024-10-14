@@ -34,26 +34,30 @@ export default function handler(req, res) {
         if (field) {
           const item = req.body.entry[0].changes[0].value.item;
           const verb = req.body.entry[0].changes[0].value.verb;
-          console.log("Item: " + item);
-          console.log("Verb: " + verb);
           if (item == 'comment' && verb == 'add') {
             const comment_id = req.body.entry[0].changes[0].value.comment_id;
-            console.log("Comment ID: " + comment_id);
-            console.log("Page ID: " + page.id);
             hideComment(comment_id, page.access_token);
-            console.log('hidden')
           } else {
             console.log('not comment added')
         }
     }
-    console.log('not feed')
     return "Done";
       }
 
     const hideComment = (comment_id, access_token) => {
         const url = `https://graph.facebook.com/v21.0/${comment_id}?is_hidden=true&access_token=${access_token}`;
         
-        axios.post(url, null, { params: {is_hidden: true} }).then(response => {
+        axios.post(
+          {
+            url: url,
+            params: {is_hidden: true},
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            timeout: 10000
+          })
+          .then(response => {
             console.log(response)
             return "Done";
         })

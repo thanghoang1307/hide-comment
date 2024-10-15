@@ -5,11 +5,12 @@ export default async function handler(req, res) {
     if (req.method == 'GET') {
       handlerGetMethod(req, res);
     } else {
-      const result = await handlerPostMethod(req, res)
+      const result = await handlerPostMethod(req, res);
+      console.log(result);
         res.status(200).json({});
     }
   } catch (error) {
-    console.error(error)
+    console.error(error);
     res.status(500).json({});
   }
 }

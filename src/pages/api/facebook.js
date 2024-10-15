@@ -7,12 +7,15 @@ export default async function handler(req, res) {
     } else {
       const result = await handlerPostMethod(req, res)
       if (result.success) {
+        console.log(result.message)
         res.status(200).json({message: result.message});
     } else {
+        console.error(result.message)
         res.status(500).json({message: result.message});
     }
     }
   } catch (error) {
+    console.error(error.message)
     res.status(500).json({message: error.message});
   }
 }

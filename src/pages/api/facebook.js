@@ -6,13 +6,7 @@ export default async function handler(req, res) {
       handlerGetMethod(req, res);
     } else {
       const result = await handlerPostMethod(req, res)
-      if (result.success) {
-        console.log(result)
         res.status(200).json({});
-    } else {
-        console.error(result)
-        res.status(500).json({});
-    }
     }
   } catch (error) {
     console.error(error)
@@ -55,7 +49,7 @@ const handlerPostMethod = async (req, res) => {
       return { success: true, message: 'not feed' };
     }
   } catch (error) {
-    return { success: false, message: error.message };
+    throw(error)
   }
 }
 
@@ -65,7 +59,6 @@ async function hideComment(comment_id, access_token) {
     const response = await axios.post(url, null, { timeout: 10000 });
     return response;
   } catch (error) {
-    console.error("Lỗi khi gọi API:", error);
     throw error;
   }
 }

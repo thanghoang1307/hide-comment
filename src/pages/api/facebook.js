@@ -12,8 +12,9 @@ export default async function handler(req, res) {
         res.status(400).json(result);
     }
     }
+  } catch (error) {
+    res.status(500);
   }
-  
 }
 
 const handlerGetMethod = (req, res) => {

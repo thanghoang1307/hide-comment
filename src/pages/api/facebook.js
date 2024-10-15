@@ -60,7 +60,19 @@ async function hideComment(comment_id, access_token) {
     const response = await axios.post(url, null, { timeout: 10000 });
     return response;
   } catch (error) {
-    throw error;
+    if (error.response) {
+      const { code, error_subcode, error_user_msg } = error.response.data.error;
+      
+      // Kiểm tra mã lỗi và thông báo lỗi cụ thể
+      if (code === 1 && error_subcode === 1446036 && error_user_msg === "Comment is already marked as spam. Duplicate request to mark comment as spam.") {
+          console.log('Trường hợp này không phải là lỗi. Comment đã được đánh dấu spam trước đó.');
+          return 'Marked as spam';
+      } else {
+          throw error;
+      }
+    } else {
+      throw error;
+  }
   }
 }
 

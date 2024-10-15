@@ -32,7 +32,8 @@ export default function handler(req, res) {
       console.log("Field: " + field);
       // Check if comment is added
       if (field) {
-        console.log(item + ' ' + verb);
+        const item = req.body.entry[0].changes[0].value.item;
+        const verb = req.body.entry[0].changes[0].value.verb;
           if (item == 'comment' && verb == 'add') {
             const comment_id = req.body.entry[0].changes[0].value.comment_id;
             hideComment(comment_id, page.access_token);

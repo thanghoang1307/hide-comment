@@ -22,21 +22,22 @@ export default function handler(req, res) {
     }
 
     const handlerPostMethod = (req, res) => {
-        console.log(req.body);
-        const config = JSON.parse(process.env.NEXT_PUBLIC_CONFIG || {});
-        const field = req.body.entry[0].changes?.[0]?.field;
-        const page_id = req.body.entry[0].id;
-        const page = config.data.find((page) => {
-          return page.id == page_id;
-        })
-        
-        console.log("Field: " + field);
-        // Check if comment is added
-        if (field) {
-          const item = req.body.entry[0].changes[0].value.item;
-          const verb = req.body.entry[0].changes[0].value.verb;
+      const config = JSON.parse(process.env.NEXT_PUBLIC_CONFIG || {});
+      const field = req.body.entry[0].changes?.[0]?.field;
+      const page_id = req.body.entry[0].id;
+      const page = config.data.find((page) => {
+        return page.id == page_id;
+      })
+      
+      console.log("Field: " + field);
+      // Check if comment is added
+      if (field) {
+        const item = req.body.entry[0].changes[0].value.item;
+        const verb = req.body.entry[0].changes[0].value.verb;
+        console.log(item + ' ' + verb);
           if (item == 'comment' && verb == 'add') {
             const comment_id = req.body.entry[0].changes[0].value.comment_id;
+            console.log(comment_id);
             hideComment(comment_id, page.access_token);
           } else {
             console.log('not comment added')

@@ -62,7 +62,7 @@ const handlerPostMethod = async (req, res) => {
 async function hideComment(comment_id, access_token) {
   try {
     const url = `https://graph.facebook.com/v21.0/${comment_id}?access_token=${access_token}`;
-    const response = await axios.post(url, null, { is_hidden: true, timeout: 10000 });
+    const response = await axios.post(url, { is_hidden: true }, { timeout: 10000 });
     return response;
   } catch (error) {
     console.error("Lỗi khi gọi API:", error);

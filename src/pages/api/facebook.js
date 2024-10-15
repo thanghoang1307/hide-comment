@@ -47,7 +47,7 @@ const handlerPostMethod = async (req, res) => {
       if (item == 'comment' && verb == 'add') {
         const comment_id = req.body.entry[0].changes[0].value.comment_id;
         const data = await hideComment(comment_id, page.access_token);
-        return { success: true, data };
+        return { success: true, message: data };
       } else {
         return { success: true, message: 'not comment' };
       }

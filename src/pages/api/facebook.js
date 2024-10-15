@@ -22,6 +22,7 @@ export default function handler(req, res) {
     }
 
     const handlerPostMethod = (req, res) => {
+        console.log(req.body);
         const config = JSON.parse(process.env.NEXT_PUBLIC_CONFIG || {});
         const field = req.body.entry[0].changes?.[0]?.field;
         const page_id = req.body.entry[0].id;

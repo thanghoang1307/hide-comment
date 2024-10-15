@@ -32,12 +32,9 @@ export default function handler(req, res) {
       console.log("Field: " + field);
       // Check if comment is added
       if (field) {
-        const item = req.body.entry[0].changes[0].value.item;
-        const verb = req.body.entry[0].changes[0].value.verb;
         console.log(item + ' ' + verb);
           if (item == 'comment' && verb == 'add') {
             const comment_id = req.body.entry[0].changes[0].value.comment_id;
-            console.log(comment_id);
             hideComment(comment_id, page.access_token);
           } else {
             console.log('not comment added')
@@ -54,6 +51,7 @@ export default function handler(req, res) {
           console.log(response)
       })
         .catch(error => {
+          console.log(error)
         });
       }
   

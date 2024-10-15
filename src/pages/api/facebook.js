@@ -5,6 +5,7 @@ export default function handler(req, res) {
         handlerGetMethod(req, res)
     } else {
         handlerPostMethod(req, res)
+        res.status(200).json({ message: 'Done' })
     }
 }
 

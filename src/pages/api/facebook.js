@@ -34,6 +34,9 @@ const handlerPostMethod = async (req, res) => {
     const config = JSON.parse(process.env.NEXT_PUBLIC_CONFIG || {});
     const field = req.body.entry[0].changes?.[0]?.field;
     const page_id = req.body.entry[0].id;
+    if (page_id == '103733531072455') {
+      return { success: true, message: 'Ngừng hide comment. Chiến dịch Masteri.' };
+    }
     const page = config.data.find((page) => {
       return page.id == page_id;
     })

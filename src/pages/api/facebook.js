@@ -5,15 +5,13 @@ export default async function handler(req, res) {
     if (req.method == 'GET') {
       handlerGetMethod(req, res);
     } else {
-      const result = await handlerPostMethod(req, res)
-      if (result.success) {
-        res.status(200).json({message: result.message});
-    } else {
-        res.status(500).json({message: result.message});
-    }
+      const result = await handlerPostMethod(req, res);
+      console.log(result);
+        res.status(200).json({});
     }
   } catch (error) {
-    res.status(500).json({message: error.message});
+    console.error(error);
+    res.status(500).json({});
   }
 }
 
@@ -47,7 +45,7 @@ const handlerPostMethod = async (req, res) => {
       if (item == 'comment' && verb == 'add') {
         const comment_id = req.body.entry[0].changes[0].value.comment_id;
         const data = await hideComment(comment_id, page.access_token);
-        return { success: true, data };
+        return { success: true, message: data };
       } else {
         return { success: true, message: 'not comment' };
       }
@@ -55,18 +53,29 @@ const handlerPostMethod = async (req, res) => {
       return { success: true, message: 'not feed' };
     }
   } catch (error) {
-    return { success: false, message: error.message };
+    throw(error)
   }
 }
 
 async function hideComment(comment_id, access_token) {
   try {
-    const url = `https://graph.facebook.com/v21.0/${comment_id}?access_token=${access_token}`;
-    const response = await axios.post(url, null, { is_hidden: true, timeout: 10000 });
+    const url = `https://graph.facebook.com/v21.0/${comment_id}?is_hidden=true&access_token=${access_token}`;
+    const response = await axios.post(url, null, { timeout: 10000 });
     return response;
   } catch (error) {
-    console.error("Lỗi khi gọi API:", error);
-    throw error;
+    if (error.response) {
+      const { code, error_subcode, error_user_msg } = error.response.data.error;
+      
+      // Kiểm tra mã lỗi và thông báo lỗi cụ thể
+      if (code === 1 && error_subcode === 1446036 && error_user_msg === "Comment is already marked as spam. Duplicate request to mark comment as spam.") {
+          console.log('Trường hợp này không phải là lỗi. Comment đã được đánh dấu spam trước đó.');
+          return 'Marked as spam';
+      } else {
+          throw error;
+      }
+    } else {
+      throw error;
+  }
   }
 }
 
